@@ -23,7 +23,7 @@ export const ListPartsWeapons = () => {
     return(
         <div className='container'>
             <h2 className='text-center'>List Weapons</h2>
-            <Link to = "/create-empire" className='btn btn-primary mb-2'>Weapons List</Link>
+            <Link to = "/" className='btn btn-primary mb-2'>Home</Link>
             <table className='table table-bordered table-striped border-dark'>
                 <thead>
                 <th>Weapon Name</th>

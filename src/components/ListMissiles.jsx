@@ -28,7 +28,7 @@ export const ListParts = () => {
     return (
         <div className='container'>
             <h2 className='text-center'>List Missiles</h2>
-            <Link to = "/create-empire" className='btn btn-primary mb-2'>Create Empire</Link>
+            <Link to = "/" className='btn btn-primary mb-2'>Home</Link>
             <table className='table table-bordered table-striped border-dark'>
                 <thead>
 

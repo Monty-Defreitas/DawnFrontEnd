@@ -22,10 +22,20 @@ function App() {
             <Router>
                 <div className="container-fluid" >
                     <HeadComponent/>
-                    <FooterComponent/>
+
                         <div className="container-fluid">
                         <Routes>
-                            <Route path = "/" element = {<><div><CreateEmpire/></div><ListParts/><ListPartsWeapons/><ListMissiles/><ListHulls/><CreateOrder/> </>}/>
+                            <Route path = "/" element = {<>
+                                <div className = "grid">
+                                <div className = "g-col-6 g-col-md-4"><CreateEmpire/></div>
+                                <div className = "g-col-6 g-col-md-4"><CreateOrder/></div>
+                            </div>
+                                <ListParts/>
+                                <ListPartsWeapons/>
+                                <ListMissiles/>
+                                <ListHulls/>
+
+                                <FooterComponent/></>}/>
                             <Route path=  "/create-empire" element = {<CreateEmpire/>}/>
                             <Route path = "/dawn-parts/shields" element = {<ListParts/>}/>
                             <Route path = "/dawn-parts/weapons" element = {<ListPartsWeapons/>}/>

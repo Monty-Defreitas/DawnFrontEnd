@@ -1,20 +1,22 @@
-import React, {useEffect, useState} from "react";
-import {Link, useNavigate} from "react-router-dom";
+import React, { useState} from "react";
+import {Link} from "react-router-dom";
 import EmpireService from "../service/EmpireService";
 
 const CreateOrder = () => {
+    const initialValues = {
+        missiles: []
+    };
 
     const [empireName, setEmpireName] = useState("");
     const [hullName, setHullName] = useState("");
     const [shieldType, setShieldType] = useState("");
     const [weaponType, setWeaponType] = useState("");
-    const [missiles, setMissiles] = useState([""]);
+    const [missiles, setMissiles] = useState("");
 
 
     const shipOrder ={empireName,hullName,shieldType,weaponType,missiles};
 
-
-
+    console.log(shipOrder);
     const saveOrder = (e) => {
 
         EmpireService.createOrder(shipOrder).then((response)=> {
@@ -89,11 +91,13 @@ const CreateOrder = () => {
                                            name = "missiles"
                                            className='form-control border-success'
                                            value = {missiles}
-                                           onChange = {(e) => setMissiles([e.target.value])}
+                                           value = {missiles}
+                                           onChange = {(e) => setMissiles(e.target.value)}
                                     >
 
                                     </input>
                                 </div>
+
                                 <button className='btn btn-success ' onClick={(e) => saveOrder(e)} >Submit</button>
                                 <Link to = "/dawn-parts"  className='btn btn-danger'>Cancel</Link>
                             </form>
