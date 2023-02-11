@@ -3,31 +3,23 @@ import {Link} from "react-router-dom";
 import EmpireService from "../service/EmpireService";
 
 const CreateOrder = () => {
-    const initialValues = {
-        missiles: []
-    };
 
     const [empireName, setEmpireName] = useState("");
     const [hullName, setHullName] = useState("");
     const [shieldType, setShieldType] = useState("");
     const [weaponType, setWeaponType] = useState("");
-    const [missiles, setMissiles] = useState("");
+    const [missiles, setMissiles] = useState([]);
+    const shipOrder = {empireName,hullName,shieldType,weaponType,missiles};
 
 
-    const shipOrder ={empireName,hullName,shieldType,weaponType,missiles};
-
-    console.log(shipOrder);
-    const saveOrder = (e) => {
-
-        EmpireService.createOrder(shipOrder).then((response)=> {
-
-            console.log(response.data);
+    const saveOrder = () => {EmpireService.createOrder(shipOrder).then((response)=> {
+        console.log("You're in save data: " + response.data.missiles);
 
         }).catch(error => {
             console.log(error);
         })
     }
-
+    console.log(shipOrder);
     return (
         <div>
             <br></br>
@@ -37,7 +29,7 @@ const CreateOrder = () => {
                         <div className = "card-body ">
                             <form>
                                 <div className = "form-group mb-2">
-                                    <label className = "form-label">Empire Name: </label>
+                                    <label className = "form-label">Username: </label>
                                     <input
                                         type = "text"
                                         placeholder='Enter Empire name'
@@ -81,7 +73,6 @@ const CreateOrder = () => {
                                            value = {weaponType}
                                            onChange = {(e) => setWeaponType(e.target.value)}
                                     >
-
                                     </input>
                                 </div>
                                 <div className = "form-group mb-2 ">
@@ -91,14 +82,11 @@ const CreateOrder = () => {
                                            name = "missiles"
                                            className='form-control border-success'
                                            value = {missiles}
-                                           value = {missiles}
-                                           onChange = {(e) => setMissiles(e.target.value)}
+                                           onChange = {(e) => setMissiles([e.target.value])}
                                     >
-
                                     </input>
                                 </div>
-
-                                <button className='btn btn-success ' onClick={(e) => saveOrder(e)} >Submit</button>
+                                <button className='btn btn-success ' onClick={(e) => saveOrder()} >Submit</button>
                                 <Link to = "/dawn-parts"  className='btn btn-danger'>Cancel</Link>
                             </form>
 

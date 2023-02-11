@@ -2,24 +2,24 @@ import React, {useState, useEffect} from 'react'
 import { Link } from 'react-router-dom'
 import EmpireService from "../service/EmpireService";
 
-export const ListParts = () => {
-    const [missiles, setMissiles] = useState([])
+export const ListParts = (props) => {
+    // const [missiles, setMissiles] = useState([])
 
-    useEffect(() => {
-        getAllEmployees();
-
-    }, [])
-
-    const getAllEmployees = () => {
-
-        EmpireService.readMissiles().then((response) => {
-            setMissiles(response.data)
-            console.log(response.data);
-        }).catch(error => {
-            console.log(error)
-        })
-
-    }
+    // useEffect(() => {
+    //     getAllEmployees();
+    //
+    // }, [])
+    //
+    // const getAllEmployees = () => {
+    //
+    //     EmpireService.readMissiles().then((response) => {
+    //         setMissiles(response.data)
+    //         console.log(response.data);
+    //     }).catch(error => {
+    //         console.log(error)
+    //     })
+    //
+    // }
 
     const deleteEmployee = () => {
 
@@ -31,18 +31,18 @@ export const ListParts = () => {
             <Link to = "/" className='btn btn-primary mb-2'>Home</Link>
             <table className='table table-bordered table-striped border-dark'>
                 <thead>
-
+                <tr>
                 <th>Missile Name</th>
                 <th>Energy Requirements</th>
                 <th>Damage Output</th>
                 <th>combat speed</th>
                 <th>Actions</th>
-
+                </tr>
 
                 </thead>
                 <tbody>
-                {
-                    missiles.map(missilesVar =>
+                {props.allMissiles && Array.isArray(props.allMissiles) && props.allMissiles.length > 0
+                    ? props.allMissiles.map(missilesVar =>
                         <tr className='border-success' key={missilesVar}>
 
                             <td>{missilesVar.missileName}</td>
@@ -56,7 +56,7 @@ export const ListParts = () => {
 
                             </td>
                         </tr>
-                    )
+                    ): <tr><td colSpan="5">No data available</td></tr>
                 }
                 </tbody>
             </table>

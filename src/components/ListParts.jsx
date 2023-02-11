@@ -1,28 +1,8 @@
-import React, {useState, useEffect} from 'react'
 import { Link } from 'react-router-dom'
-import EmpireService from "../service/EmpireService";
 
-export const ListParts = () => {
-    const [shields, setShields] = useState([])
-
-    useEffect(() => {
-        getAllEmployees();
-
-    }, [])
-
-    const getAllEmployees = () => {
-
-        EmpireService.readShields().then((response) => {
-            setShields(response.data)
-            console.log(response.data);
-        }).catch(error => {
-            console.log(error)
-        })
-
-    }
-
-    const deleteEmployee = () => {
-
+export const ListParts = (props) => {
+    const deleteParts = (id) => {
+        // Add your logic for deleting a part here
     }
 
     return (
@@ -31,18 +11,18 @@ export const ListParts = () => {
             <Link to = "/" className='btn btn-primary mb-2'>Home</Link>
             <table className='table table-bordered table-striped border-dark'>
                 <thead>
-
+                <tr>
                 <th>Shield Name</th>
                 <th>Energy Requirements</th>
                 <th>Damage Mitigation</th>
                 <th>Parsecks</th>
                 <th>Actions</th>
-
+                </tr>
                 </thead>
                 <tbody>
-                {
-                    shields.map(shieldVar =>
-                        <tr className='border-success' key={shieldVar}>
+                {props.allShields && Array.isArray(props.allShields) && props.allShields.length > 0
+                    ? props.allShields.map((shieldVar, index) =>
+                        <tr className='border-success' key={index}>
 
                             <td>{shieldVar.shieldType}</td>
                             <td>{shieldVar.energyRequirements}</td>
@@ -50,13 +30,13 @@ export const ListParts = () => {
                             <td>{shieldVar.parsecks}</td>
                             <td>
                                 <Link className='btn btn-info' to={`/edit-employee/${shieldVar.id}`}>Update</Link>
-                                <button className='btn btn-info' onClick={() => deleteEmployee(shieldVar.id)}
+                                <button className='btn btn-info' onClick={() => deleteParts(shieldVar.id)}
                                         style = {{marginLeft:"10px"}}>Delete </button>
-
                             </td>
                         </tr>
-                    )
+                    ): <tr><td colSpan="5">No data available</td></tr>
                 }
+
                 </tbody>
             </table>
         </div>
